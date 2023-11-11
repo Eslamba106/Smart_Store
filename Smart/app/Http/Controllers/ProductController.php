@@ -79,13 +79,9 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        // // return $request;
-        // dd($request);
         $slug = Str::slug($request->name , '-');
         $path = uniqid().'-'.$slug.'.'.$request->image->extension();
         $request->image->move(public_path('product_image') , $path);
-
 
         $newproduct = $this->products->where('id' , $id)->first();
         $newproduct->name = $request->name ;

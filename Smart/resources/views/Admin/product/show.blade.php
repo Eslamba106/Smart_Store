@@ -1,8 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
-{{ $item->name }}
+@section('content2')
 <div class="main">
     <div class="content">
     	<div class="content_top">
@@ -71,9 +70,24 @@
 					<div class="rating">
 						<p>Rating:<img src="{{  asset('images/rating.png')}}" alt="" /><span>[3 of 5 Stars]</span></p>
 					</div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="#">Add to Cart</a></span></div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('products.edit' , $item->id) }}">Edit</a></span></div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('products.delete' , $item->id) }}">Delete</a></div>
+					<br><br><br>
+					
+					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('cart.creates' , $item->id) }}">Add to Cart</a></span></div>
+					@if (auth()->user()->type == 'admin')
+						<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('products.edit' , $item->id) }}">Edit</a></span></div>
+						<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('products.delete' , $item->id) }}" onclick="conf(event)">Delete</a></div>
+					@endif
+			@if(Session::has('message'))
+                <script>
+                    swal("Message" , "{{ Session::get('message') }}" , 'success' , {
+                        button: true ,
+                        button:"ok",
+                        timer:3000,
+                        dangerMode: true
+                    })
+                </script>
+            @endif
+							{{-- @endif --}}
 					<div class="clear"></div>
 				</div>
 			</div>
@@ -145,4 +159,5 @@
  		</div>
  	</div>
 	</div>
+
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
+@section('content2')
 
 <div class="section group" >
     @foreach ($category as $item)
@@ -15,7 +15,10 @@
             </div>
             @endforeach
 </div>
-<a href="{{ route('category.create') }}" >
+@if (auth()->user()->type == 'admin')
+    <a href="{{ route('category.create') }}" >
     <button class="btn mb-2 col-md-12" style="background-color: #602D8D ; color:white">Add Department</button>
-</a>
+    </a>
+@endif
+
 @endsection

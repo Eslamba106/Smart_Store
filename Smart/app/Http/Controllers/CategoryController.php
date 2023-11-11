@@ -40,6 +40,7 @@ class CategoryController extends Controller
         $query->image =$path;
         $query->save();
         return redirect()->route('category.index')->with('categories' , $query);
+        // return redirect()->route('category.index')->with('message' , 'successfully added');
     }
 
 

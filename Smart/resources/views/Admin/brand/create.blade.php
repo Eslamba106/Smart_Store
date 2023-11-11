@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
+@section('content2')
 <div class="page-body" >  
     {{-- Add Product --}}
     <div class="container-fluid" > 
@@ -34,15 +34,8 @@
                                                     @foreach ($mainbrand as $brand)
                                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                         @endforeach
-                                                        {{-- <option value="">{{ $brand->child->name}}</option> --}}
                                                 </select>
                                             </div>
-                                              
-                                            {{-- <div class="form-group mb-0">
-                                                <label for="validationCustom01" class="mb-1">Logo</label>
-                                                <input class="form-control dropify" data-default-file="{{ asset('appfavicon/64e0a5a0576e919-08-2023.png') }}" id="validationCustom01" type="file" name="image_path">
-                                            </div> --}}
-                    
                                         </div>
                                     
                                 
@@ -52,6 +45,16 @@
                             
                            
                         </form>
+                        @if(Session::has('message'))
+                        <script>
+                            swal("Message" , "{{ Session::get('message') }}" , 'success' , {
+                                button: true ,
+                                button:"ok",
+                                timer:3000,
+                                dangerMode: true
+                            })
+                        </script>
+                    @endif
                         </div>
                     </div>
                 </div>

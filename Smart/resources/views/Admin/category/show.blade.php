@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
+@section('content2')
 
 <div class="main">
     <div class="content">
@@ -55,7 +55,7 @@
                         @if ($categories->parent_id == 0)
                             <p>Main Department : <span>Main</span></p>
                         @else
-                           <p>Main Department : <span>{{ $categories->child->name }}</span></p> 
+                           <p>Main Department : <span>{{ $categories->parent->name }}</span></p> 
                         @endif
 					</div>
 					<div class="price">
@@ -83,9 +83,15 @@
 					<div class="rating">
 						<p>Rating:<img src="{{  asset('images/rating.png')}}" alt="" /><span>[3 of 5 Stars]</span></p>
 					</div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="#">Add to Cart</a></span></div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('category.edit' , $categories->id) }}">Edit</a></span></div>
-					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('category.delete' , $categories->id) }}">Delete</a></div>
+					<br>
+					<br>
+					<br>
+					<div class="button"><span ><a style="margin: 1px ; padding:10px" href="#">Products</a></span></div>
+					@if (auth()->user()->type == 'admin')
+						<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('category.edit' , $categories->id) }}">Edit</a></span></div>
+						<div class="button"><span ><a style="margin: 1px ; padding:10px" href="{{ route('category.delete' , $categories->id) }}">Delete</a></div>
+					@endif
+
 					<div class="clear"></div>
 				</div>
 			</div>

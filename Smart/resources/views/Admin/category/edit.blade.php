@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
+@section('content2')
 <div class="page-body" >  
     {{-- Add Product --}}
     <div class="container-fluid" > 
@@ -35,7 +35,7 @@
                                                     @if ($query->parent_id == 0)
                                                     <option value="{{ $query->parent_id }}">Main</option>
                                                     @else
-                                                    <option value="{{ $query->parent_id }}">{{ $query->child->name }}</option>
+                                                    <option value="{{ $query->parent_id }}">{{ $query->parent->name }}</option>
                                                     @endif
 
                                                     @foreach ($categories as $item)

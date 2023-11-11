@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory ,SoftDeletes;
+    use HasFactory ;
 
 
     protected $fillable = ['id' , 'name' , 'image' , 'parent_id'];
@@ -17,10 +18,10 @@ class Category extends Model
     public function product(){
         return $this->hasMany(Product::class , 'category_id');
     }
-    public function child(){
+    public function parent(){
         return $this->belongsTo(Category::class , 'parent_id');
     }
-    public function parent(){
+    public function child(){
         return $this->hasMany(Category::class , 'parent_id');
     }
 }

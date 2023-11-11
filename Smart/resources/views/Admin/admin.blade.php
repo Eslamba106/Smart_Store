@@ -1,6 +1,6 @@
 @extends('layouts.navbar')
 
-@section('content')
+@section('content2')
 
 <a href="{{ route('category.create') }}">
 <button class="btn mb-2" style="background-color: #602D8D ; color:white">Add Department</button>

@@ -1,9 +1,9 @@
 @extends('layouts.navbar')
 
-@section('content')
+{{-- @section('content') --}}
 
 
-@section('content')
+@section('content2')
 
 <div class="section group" >
     @foreach ($products as $item)
@@ -14,13 +14,17 @@
                 <h2>{{ $item->name }} </h2>
                 <a href=""><img src="/product_image/{{ $item->image }}" alt="" /></a>
                 
-                {{-- <div class="button"><span><a href="preview-3.html" class="details">Details</a></span></div> --}}
+                <div class="button"><span><a href="{{ route('products.show' , $item->id) }}" class="details">Details</a></span></div>
             </div>
             @endforeach
 </div>
-<a href="{{ route('category.create') }}" >
-    <button class="btn mb-2 col-md-12" style="background-color: #602D8D ; color:white">Add Department</button>
-</a>
-@endsection
+<br>
+<br>
+<br>
+@if (auth()->user()->type == 'admin')
+    <a href="{{ route('products.create') }}" >
+        <button class="btn mb-2 col-md-12" style="background-color: #602D8D ; color:white">Add Product</button>
+    </a>
+@endif
 
 @endsection

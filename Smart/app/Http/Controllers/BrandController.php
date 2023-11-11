@@ -48,7 +48,8 @@ class BrandController extends Controller
         $brands->name = $request->name;
         $brands->parent_id = $request->parent_id ?? 0 ;
         $brands->save();
-        return redirect()->route('brand.index');
+        // return redirect()->route('brand.index');
+        return back()->with('message' , 'successfully added');
 
     }
 
@@ -76,7 +77,10 @@ class BrandController extends Controller
     }
     public function delete($id)
     {
-        $this->brand->where('id' , $id)->first()->delete();
+        $branddd = $this->brand->where('id' , $id)->first();
+        $branddd->parent()->delete();
+        $branddd->product()->delete();
+        $branddd->delete();
         return redirect()->route('brand.index') ;
     }
 

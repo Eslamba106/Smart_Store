@@ -1,7 +1,7 @@
 @extends('layouts.navbar')
 
 
-@section('content')
+@section('content2')
 <div class="page-body" >  
     {{-- Add Product --}}
     <div class="container-fluid" > 

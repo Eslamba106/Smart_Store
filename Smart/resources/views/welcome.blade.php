@@ -1,6 +1,5 @@
 @extends('layouts.navbar')
 
-@section('content')
+@section('content2')
 
-Test
 @endsection
