@@ -1,18 +1,25 @@
-@extends('layouts.dashboard.dashboard')
-@extends('layouts.dashboard.dashboard')
-@section('title')
-    انشاء قسم
-@endsection
-@section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item active">انشاء قسم</li>
-@endsection
+<x-back-office.dashboard-layout title="انشاء قسم">
+    <x-slot:breadcrumb >
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">اضافة قسم جديد</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            {{-- @section('breadcrumb') --}}
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                                </li>
+                                <li class="breadcrumb-item active"><a href="{{ route('admin.categories') }}">الاقسام</a></li>
+                            {{-- @show --}}
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </x-slot:breadcrumb>
 
-@section('page_name')
-    انشاء قسم
-@endsection
-
-@section('content')
     <div class="page-body">
         <div class="container-fluid">
             <div class="row product adding">
@@ -24,7 +31,7 @@
 
                         <div class="card-body">
                             <div class="digital-add needs-validation">
-                                <form action="{{ route('admin.category.store') }}" method="POST"
+                                <form action="{{ route('admin.categories.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @if ($errors->any())
@@ -71,4 +78,4 @@
         </div>
 
     </div>
-@endsection
+</x-back-office.dashboard-layout>

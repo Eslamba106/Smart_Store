@@ -13,10 +13,10 @@ function uploadImage(Request $request , $file_name)
     
 }
 
-function auth_name(){
-    return  auth()->user()->name;
-}
+// function auth_name(){
+//     return  auth()->user()->name ?? '';
+// }
 
-function auth_image(){
-    return  auth()->user()->image;
-}
+// function auth_image(){
+//     return  auth()->user()->image ?? '';
+// }

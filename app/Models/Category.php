@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use App\Models\Product;
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,5 +31,26 @@ class Category extends Model
         $builder->when($filters['name'] ?? false , function($builder , $value){
             $builder->where('categories.name','like','%'.$value.'%');
         });
+    }
+    public static function rules($id = 0){
+        return [
+            'name'=> [
+                'required',
+                'string',
+                'max:255',
+                'min:3',
+                Rule::unique('categories' , 'name')->ignore($id),
+                // function($attribute , $value , $fails){
+                //     if(strtolower($value) == 'laravel'){
+                //         $fails('This name is forbidden');
+                //     }
+                // }    
+            ],
+            'parent_id' => [
+                'nullable' , 'integer' , 'exists:categories,id'
+            ],
+            'image' => 'required|image|max:1028576|dimensions:min_width=100,min_height=100',
+            'status' => 'in:active,archived',
+        ];
     }
 }

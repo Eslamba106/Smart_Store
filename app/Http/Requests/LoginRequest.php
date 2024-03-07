@@ -26,4 +26,14 @@ class LoginRequest extends FormRequest
             "password"=> ["required", "min:4"],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'البريد الالكتروني مطلوب',
+            'password.required' => 'كلمة السر مطلوبة',
+            'password.min' => 'يجب الا تقل كلمة السر عن 4 خانات'
+        ];
+
+    }
 }

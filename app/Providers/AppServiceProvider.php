@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Category\CategoryRepositoryModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // $this->app->bind(CategoryRepositoryModel::class , function(){
+        //     return new CategoryRepository();
+        // });
     }
 
     /**

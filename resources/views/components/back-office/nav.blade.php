@@ -5,6 +5,7 @@
             <li class="nav-item">
                 {{-- <a href="{{ route($item['route']) }}" class="nav-link {{ Route::is($item['active']) ? "active" : ''  }}"> --}}
                 <a href="{{ route($item['route']) }}" class="nav-link {{ $item['route'] == $active ? "active" : ''  }}">
+                {{-- <a href="{{ route($item['route']) }}" class="nav-link {{ $item['route'] == $active ? "active" : ''  }}"> --}}
                     @if (isset($item['icon']) )<i class="{{ $item['icon'] }}"></i>@endif
                     <p>
                         {{ $item['title'] }}

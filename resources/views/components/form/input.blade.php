@@ -6,7 +6,7 @@
     'value' => ''
 ])
 @if(isset($label))
-<lable for="">{{ $label }}</lable>
+<label for="">{{ $label }}</label>
 @endif
 {{-- <label for="">{{ $label }}</label> --}}
 <input 

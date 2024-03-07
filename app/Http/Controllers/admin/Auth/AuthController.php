@@ -48,7 +48,10 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard');
         };
         
-        return redirect()->route('login-page');
+        // return redirect()->route('login-page');
+        return back()->withErrors([
+            'loginError' => 'خطأ في البريد الالكتروني او كلمة المرور . من فضلك حاول مرة اخري',
+        ]);
     }
 
     public function logout(){
