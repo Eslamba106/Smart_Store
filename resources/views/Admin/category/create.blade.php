@@ -11,7 +11,7 @@
                             {{-- @section('breadcrumb') --}}
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="{{ route('admin.categories') }}">الاقسام</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('admin.categories.index') }}">الاقسام</a></li>
                             {{-- @show --}}
                         </ol>
                     </div><!-- /.col -->

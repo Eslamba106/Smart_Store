@@ -20,10 +20,7 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        // $request = request();
-        // $categories = Category::filter($request->query())->paginate();
-        $categories = $this->category->get();
-        // $categories->paginate(2);
+        $categories = $this->category->get()->paginate(4);
         return view('Admin.category.index' , compact('categories'));
     }
 
@@ -37,9 +34,45 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request){
         $this->category->add($request);
-        return redirect()->route('admin.category')->with('message' , 'successfully added');
-
+        return redirect()->route('admin.categories.index')->with('message' , 'successfully added');
     }
+    public function edit($id)
+    {
+        $parents = Category::where('id', '<>', $id)
+            ->where(function ($query) use ($id) {
+
+                $query->whereNull('parent_id')
+                    ->orWhere('parent_id', '<>', $id);
+            })->pluck('name', 'id');
+        try {
+            $query = Category::findOrFail($id);
+        } catch (\Exception $e) {
+            return ('Record Not Fond');
+        }
+    return view('Admin.category.edit', compact(['parents', 'query']));
+}
+    // public function edit($id)
+    // {
+    //     $parents = Category::where('id', '<>', $id)
+    //         ->where(function ($query) use ($id) {
+
+    //             $query->whereNull('parent_id')
+    //                 ->orWhere('parent_id', '<>', $id);
+    //         })->pluck('name','id');
+    //     try {
+    //         $query = Category::findOrFail($id);
+    //     } catch (\Exception $e) {
+    //         return redirect()->route('dashboard.categories.index')->with('info', 'Record Not Fond');
+    //     }
+    //     return view('Admin.category.edit', compact(['parents', 'query']));
+    // }
+    //     public function edit($id)
+    // {
+    //     $categories = $this->category->get();
+    //     $query = $categories->where('id' , $id)->first() ;
+    //     // dd($categories);
+    //     return view('Admin.category.edit')->with('query' , $query)->with('categories' , $categories);
+    // }
     // public function store(Request $request)
     // {
     //     $slug = Str::slug($request->name , '-');
@@ -63,27 +96,23 @@ class CategoryController extends Controller
     //     return view('Admin.category.show')->with('categories' , $categories) ;
     // }
 
-    // public function edit($id)
-    // {
-    //     $categories = $this->category->all();
-    //     $query = $this->category->where('id' , $id)->first() ;
-    //     return view('Admin.category.edit')->with('query' , $query)->with('categories' , $categories);
-    // }
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $slug = Str::slug($request->name , '-') ;
-    //     $path = uniqid().'-'.$slug.'.'.$request->image->extension() ;
-    //     $request->image->move(public_path('category_images'), $path);
 
-    //     $newcategory = $this->category->where('id' , $id)->firstOrFail();
-    //     $newcategory->name = $request->name ;
-    //     $newcategory->parent_id = $request->parent_id ;
-    //     $newcategory->image = $path ;
-    //     $newcategory->save();
-    //     return $newcategory ;
-    // }
+    public function update(Request $request, $id)
+    {
+        dd($request);
+        // $slug = Str::slug($request->name , '-') ;
+        // $path = uniqid().'-'.$slug.'.'.$request->image->extension() ;
+        // $request->image->move(public_path('category_images'), $path);
+
+        // $newcategory = $this->category->where('id' , $id)->firstOrFail();
+        // $newcategory->name = $request->name ;
+        // $newcategory->parent_id = $request->parent_id ;
+        // $newcategory->image = $path ;
+        // $newcategory->save();
+        // return $newcategory ;
+    }
 
 
     // public function destroy(Category $category)

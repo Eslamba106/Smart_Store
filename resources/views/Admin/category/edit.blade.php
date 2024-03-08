@@ -1,17 +1,28 @@
-@extends('layouts.dashboard.dashboard')
-@section('title')
-    تعديل قسم
-@endsection
-@section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item active">تعديل قسم</li>
-@endsection
+<x-back-office.dashboard-layout title="تعديل قسم : {{ $query->name }}">
 
-@section('page_name')
-    تعديل قسم : {{ $query->name }}
-@endsection
+    <x-slot:breadcrumb>
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">تعديل قسم : {{ $query->name }}</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            {{-- @section('breadcrumb') --}}
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                            </li>
+                            <li class="breadcrumb-item active"><a
+                                    href="{{ route('admin.categories.index') }}">الاقسام</a></li>
+                            {{-- @show --}}
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </x-slot:breadcrumb>
 
-@section('content')
+
     <div class="page-body">
         {{-- Add Product --}}
         <div class="container-fluid">
@@ -26,7 +37,7 @@
 
                         <div class="card-body">
                             <div class="digital-add needs-validation">
-                                <form action="{{ route('admin.category.update', $query->id) }}" method="POST"
+                                <form action="{{ route('admin.categories.update', $query->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
@@ -35,18 +46,20 @@
                                     @endif
                                     <div class="form-group">
                                         <label for="validationCustom01" class="mb-1">الاسم</label>
-                                        <input class="form-control" id="validationCustom01" type="text" name="name"
-                                            value="{{ $query->name }}">
+                                        <input class="form-control" id="validationCustom01" type="text"
+                                            name="name" value="{{ $query->name }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="validationCustom01" class="mb-1">القسم الرئيسي</label>
-                                        <select name="parent_id" id="validationCustom01" class="form-control">
+                                        <x-form.select name="parent_id" :options="$parents"  />
+                                        {{-- <select name="parent_id" id="validationCustom01" class="form-control">
 
                                             @if ($query->parent_id == 0)
                                                 <option value="{{ $query->parent_id }}">رئيسي</option>
                                             @else
-                                                <option value="{{ $query->parent_id }}">{{ $query->parent->name }}</option>
+                                                <option value="{{ $query->parent_id }}">{{ $query->parent->name }}
+                                                </option>
                                             @endif
 
                                             @foreach ($categories as $item)
@@ -56,7 +69,7 @@
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endif
                                             @endforeach
-                                        </select>
+                                        </select> --}}
                                     </div>
 
                                     <div class="form-group mb-0">
@@ -66,22 +79,22 @@
                                             id="validationCustom01" type="file" name="image">
                                     </div>
 
-                            {{-- </div> --}}
+                                    {{-- </div> --}}
 
 
-                                <div class="modal-footer">
-                                    <button class="btn" style="background-color: #602D8D ; color:white"
-                                        type="submit">تعديل</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button class="btn" style="background-color: #602D8D ; color:white"
+                                            type="submit">تعديل</button>
+                                    </div>
 
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
-@endsection
+</x-back-office.dashboard-layout>

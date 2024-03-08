@@ -5,15 +5,13 @@ return [
         // "icon"   => "nav-icon fas fa-tachometer-alt",
         "route"  => "admin.dashboard",
         "title"  => "الرئيسية",
-        "active" => "admin",
+        "active" => "admin.dashboard",
     ],
     [
-        // "icon"  => "far fa-circle nav-icon",
-        // "icon"  => "far fa-table-cells",
-        "route" => "admin.categories",
+        "route" => "admin.categories.index",
         "title" => "الاقسام",
         "badge" => "Eslam",
-        "active"=> "admin.categories.*",
+        "active"=> "admin.categories.*"
     ],
     [
         "route" => "admin.brands",

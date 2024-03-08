@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories\Category;
 
@@ -17,22 +17,20 @@ class CategoryRepository implements CategoryRepositoryModel
     public function get()
     {
         $request = request();
-        return Category::filter($request->query())->paginate();
+        return Category::filter($request->query()); //with('parent')->
     }
     public function add($category)
     {
-        $item = Category::where('id' , $category->id)->first();
-        if($item){
-        
-        }
-        else{
+        $item = Category::where('id', $category->id)->first();
+        if ($item) {
+        } else {
             $data = $category->except('image');
             $data['parent_id'] = $category->parent_id ?? 0;
-            if($category->hasFile('image')){
-                $data['image'] = uploadImage($category , 'Categories_images');
+            if ($category->hasFile('image')) {
+                $data['image'] = uploadImage($category, 'Categories_images');
             }
             $category = Category::create($data);
-            return $category ;
+            return $category;
         }
         // $request->merge([
         //     'slug' => Str::slug($request->post('name')),
@@ -58,4 +56,6 @@ class CategoryRepository implements CategoryRepositoryModel
         // return redirect()->route('category.index')->with('categories' , $query);
         // return redirect()->route('category.index')->with('message' , 'successfully added');
     }
+
+
 }

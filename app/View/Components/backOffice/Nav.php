@@ -18,6 +18,7 @@ class Nav extends Component
     {
         $this->items = config('nav');
         $this->active = Route::currentRouteName() ;
+        // dd($this->active);
     }
 
     /**
