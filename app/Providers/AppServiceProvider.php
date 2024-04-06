@@ -31,9 +31,12 @@ class AppServiceProvider extends ServiceProvider
         $mainproducts = Product::all();
         $maincategories = Category::all();
         $mainbrands = Brand::all();
-        view()->share('mainproducts', $mainproducts);
-        view()->share('maincategories' , $maincategories);
-        view()->share('mainbrands' , $mainbrands);
+        if($mainproducts != null && $maincategories != null && $mainbrands != null ){
+
+            view()->share('mainproducts', $mainproducts);
+            view()->share('maincategories' , $maincategories);
+            view()->share('mainbrands' , $mainbrands);
+        }
         Paginator::useBootstrapFour();
     }
 }

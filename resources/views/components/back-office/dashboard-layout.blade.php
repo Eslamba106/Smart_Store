@@ -164,11 +164,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="img-circle elevation-2"
+                        <img src="{{ asset('storage/' . Auth::guard('admin')->user() ) }}" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
                     </div>
                 </div>
 

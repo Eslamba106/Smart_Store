@@ -1,9 +1,109 @@
-@extends('layouts.navbar')
+<x-back-office.dashboard-layout title="تعديل براند : {{ $query->name }}">
+
+    <x-slot:breadcrumb>
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">تعديل براند : {{ $query->name }}</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            {{-- @section('breadcrumb') --}}
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                            </li>
+                            <li class="breadcrumb-item active"><a
+                                    href="{{ route('admin.categories.index') }}">البراندات</a></li>
+                            {{-- @show --}}
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </x-slot:breadcrumb>
+
+
+    <div class="page-body">
+        {{-- Add Product --}}
+        <div class="container-fluid">
+            <div class="row product adding">
+                <div class="col-xl-12">
+                    <div class="card">
+
+
+                        <div class="card-header">
+                            <h5 class="modal-title f-w-600" id="exampleModalLabel">تعديل البراند</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="digital-add needs-validation">
+                                <form action="{{ route('admin.brands.update', $query->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
+                                    @if ($errors->any())
+                                        {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                    @endif
+                                    <div class="form-group">
+                                        <label for="validationCustom01" class="mb-1">الاسم</label>
+                                        <input class="form-control" id="validationCustom01" type="text"
+                                            name="name" value="{{ $query->name }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="validationCustom01" class="mb-1">البراند الرئيسي</label>
+                                        <x-form.select name="parent_id" :options="$parents"  />
+                                    </div>
+
+    
+
+
+
+                                    <div class="modal-footer">
+                                        <button class="btn" style="background-color: #602D8D ; color:white"
+                                            type="submit">تعديل</button>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</x-back-office.dashboard-layout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- @extends('layouts.navbar')
 
 
 @section('content2')
 <div class="page-body" >  
-    {{-- Add Product --}}
     <div class="container-fluid" > 
         <div class="row product adding">
             <div class="col-xl-12">
@@ -65,4 +165,4 @@
     </div>  
 
 </div>
-@endsection
+@endsection --}}

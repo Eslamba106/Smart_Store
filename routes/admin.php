@@ -16,13 +16,16 @@ use App\Http\Controllers\admin\CategoryController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::controller(AuthController::class)->group(function () {
 
+// Auth Routes 
+Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'loginPage')->name('admin.login-page')->middleware('guest:admin');
     Route::post('/login', 'login')->name('admin.login')->middleware('guest:admin');
     Route::get('register','registerPage')->name('admin.register-page')->middleware('guest:admin');
     Route::post('register','register')->name('admin.register')->middleware('guest:admin');
 });
+
+// Dashboard Routes
 Route::get('/', fn()=>view('admin.dashboard.index'))->middleware('auth:admin')->name('admin.dashboard');
 Route::get('products', function () {
     return view('pages.products');
@@ -34,7 +37,7 @@ Route::post('logout',[AuthController::class ,'logout'])->middleware('auth:admin'
 // Route::resource('/category' , CategoryController::class)->middleware('auth:admin');
 
 Route::group([
-    // "middleware"=> ["auth"],
+    "middleware"=> ["auth:admin"],
     "as"=> "admin.",
     // "prefix" => "admin",
 ],
@@ -44,16 +47,16 @@ Route::group([
     Route::get('categories/create',[CategoryController::class,'create'])->name('categories.create');
     Route::get('categories/edit/{category}',[CategoryController::class,'edit'])->name('categories.edit');
     Route::put('categories/update/{id}',[CategoryController::class,'update'])->name('categories.update');
-    Route::get('categories/delete',[CategoryController::class,'delete'])->name('categories.delete');
+    Route::delete('categories/delete/{id}',[CategoryController::class,'delete'])->name('categories.delete');
 });
 
 Route::controller(ProductController::class)->group(function () {
-    Route::get('products','index')->name('admin.products');
-    Route::post('products/store','store')->name('admin.products.store');
-    Route::get('products/create','create')->name('admin.products.create');
-    Route::get('products/edit/{products}','edit')->name('admin.products.edit');
-    Route::put('products/update/{id}','update')->name('admin.products.update');
-    Route::get('products/delete','delete')->name('admin.products.delete');
+    Route::get('products','index')->middleware('auth:admin')->name('admin.products');
+    Route::post('products/store','store')->middleware('auth:admin')->name('admin.products.store');
+    Route::get('products/create','create')->middleware('auth:admin')->name('admin.products.create');
+    Route::get('products/edit/{products}','edit')->middleware('auth:admin')->name('admin.products.edit');
+    Route::put('products/update/{id}','update')->middleware('auth:admin')->name('admin.products.update');
+    Route::get('products/delete','delete')->middleware('auth:admin')->name('admin.products.delete');
 });
 Route::controller(BrandController::class)->group(function () {
     Route::get('brands','index')->name('admin.brands');
@@ -61,7 +64,7 @@ Route::controller(BrandController::class)->group(function () {
     Route::get('brands/create','create')->name('admin.brands.create');
     Route::get('brands/edit/{brands}','edit')->name('admin.brands.edit');
     Route::put('brands/update/{id}','update')->name('admin.brands.update');
-    Route::get('brands/delete','delete')->name('admin.brands.delete');
+    Route::delete('brands/delete/{id}','delete')->name('admin.brands.delete');
 });
 
 // Route::resource('/products' , ProductController::class);

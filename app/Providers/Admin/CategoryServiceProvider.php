@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers\Admin;
 
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryModel;

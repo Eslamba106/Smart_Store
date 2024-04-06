@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Cairo',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +169,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\CategoryServiceProvider::class,
+        App\Providers\Admin\CategoryServiceProvider::class,
+        App\Providers\Admin\BrandServiceProvider::class,
+        App\Providers\Admin\ProductServiceProvider::class,
     ])->toArray(),
 
     /*

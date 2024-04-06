@@ -44,7 +44,8 @@
         {{-- @if ($categories->count()) --}}
         @forelse ($categories as $category)
             <tr>
-                <td><img src="{{ asset('category_images/'.$category->image) }}" height="50" alt=""></td>
+                <td><img src="{{ $category->image_url }}" height="50" alt=""></td>
+                {{-- <td><img src="{{ asset('category_images/'.$category->image) }}" height="50" alt=""></td> --}}
                 <td>{{ $category->id }}</td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->parent_name ?? "Main" }}</td>

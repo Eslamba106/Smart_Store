@@ -75,7 +75,7 @@
                                     <div class="form-group mb-0">
                                         <label for="validationCustom01" class="mb-1">الصورة</label>
                                         <input class="form-control dropify"
-                                            data-default-file="{{ asset('category_images/' . $query->image) }}"
+                                            {{-- data-default-file="{{ asset('category_images/' . $query->image) }}" --}}
                                             id="validationCustom01" type="file" name="image">
                                     </div>
 

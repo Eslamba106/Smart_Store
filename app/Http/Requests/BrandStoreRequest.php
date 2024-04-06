@@ -22,7 +22,7 @@ class BrandStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:brands,name',
             'parent_id' => 'nullable|exists:brands,id'
         ];
     }

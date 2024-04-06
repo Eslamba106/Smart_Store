@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repositories\Category;
+namespace App\Repositories\Product;
 
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 
-class CategoryRepository implements CategoryRepositoryModel
+class ProductRepository implements ProductRepositoryModel
 {
 
     protected $items;

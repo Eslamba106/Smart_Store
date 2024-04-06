@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\Brand;
 use App\Models\Product;
+use App\Repositories\Brand\BrandRepositoryModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -13,24 +14,32 @@ class BrandController extends Controller
 {
     public $brand ;
     public $products ;
-    public function __construct(Brand $brand , Product $products)
+    public function __construct(BrandRepositoryModel $brand)
     {
         $this->brand = $brand ; 
-        $this->products = $products ; 
+        // $this->products = $products ; 
     }
+    // public function __construct(Brand $brand , Product $products)
+    // {
+    //     $this->brand = $brand ; 
+    //     $this->products = $products ; 
+    // }
     public function index()
     {
 
         $query = $this->brand->get();
+        // dd($query)
         return view('Admin.brand.index')->with('brands' , $query);
     }
 
 
     public function create()
     {
-        $mainbrand = $this->brand->where('parent_id' ,0)->get();
-        $brands = Brand::get();
-        return view('Admin.brand.create')->with('mainbrand' , $mainbrand)->with('brands' , $brands);
+        $query = $this->brand->get();
+        // $mainbrand = $this->brand->where('parent_id' ,0)->get();
+        // $brands = Brand::get();
+        return view('Admin.brand.create')->with('brands' , $query);
+        // return view('Admin.brand.create')->with('mainbrand' , $mainbrand)->with('brands' , $brands);
     }
 
 
@@ -44,11 +53,13 @@ class BrandController extends Controller
 
     public function store(BrandStoreRequest $request)
     {
+        $this->brand->add($request);
+        // dd($request);
 
-        $brands = new Brand();
-        $brands->name = $request->name;
-        $brands->parent_id = $request->parent_id ?? 0 ;
-        $brands->save();
+        // $brands = new Brand();
+        // $brands->name = $request->name;
+        // $brands->parent_id = $request->parent_id ?? 0 ;
+        // $brands->save();
         // return redirect()->route('brand.index');
         return back()->with('message' , 'successfully added');
 
@@ -57,32 +68,33 @@ class BrandController extends Controller
 
     public function edit($id)
     {
+        $parents = Brand::where('id', '<>', $id)
+        ->where(function ($query) use ($id) {
+
+            $query->whereNull('parent_id')
+                ->orWhere('parent_id', '<>', $id);
+        })->pluck('name', 'id');
         $query = Brand::get()->where('id' , $id)->first();
         $queries = $this->brand->get() ;
-        return view('Admin.brand.edit')->with('query' , $query)->with('queries' , $queries) ;
+        return view('Admin.brand.edit' , compact(['query' , 'parents', 'queries'])); //->with('query' , $query)->with('queries' , $queries) ;
     }
 
     public function update(Request $request ,$id)
     {
-        $newbrand = $this->brand->where('id' , $id)->firstOrFail();
-        $newbrand->name = $request->name ;
-        $newbrand->parent_id = $request->parent_id ?? 0 ;
-        $newbrand->save();
-        return redirect()->route('brand.index');
+        $this->brand->add($request);
+        return redirect()->route('admin.brands');
 
     }
 
-    public function destroy(Brand $brand)
-    {
-        //
-    }
+    // public function delete(Brand $brand)
+    // {
+    //     //
+    // }
     public function delete($id)
     {
-        $branddd = $this->brand->where('id' , $id)->first();
-        $branddd->parent()->delete();
-        $branddd->product()->delete();
-        $branddd->delete();
-        return redirect()->route('brand.index') ;
+        $brand = $this->brand->delete($id);
+ 
+        return redirect()->route('admin.brands') ;
     }
 
 }

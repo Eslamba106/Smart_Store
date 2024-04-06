@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $query = $this->category->get();
+        $query = $this->category->get()->get();
         return view('Admin.category.create')->with('categories' , $query);
     }
 
@@ -101,7 +101,11 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
+        // dd($request);
+        $category = Category::find($id);
+        $this->category->add($request);
+        return redirect()->route('admin.categories.index')->with('message' , 'successfully added');
+        // return $category;
         // $slug = Str::slug($request->name , '-') ;
         // $path = uniqid().'-'.$slug.'.'.$request->image->extension() ;
         // $request->image->move(public_path('category_images'), $path);
@@ -119,9 +123,10 @@ class CategoryController extends Controller
     // {
     //     //
     // }
-    // public function delete($id)
-    // {
-    //     $this->category->where('id' , $id)->first()->delete();
-    //     return redirect()->route('category.index');
-    // }
+    public function delete($id)
+    {
+        // $category = $this->category->where('id' , $id)->first();
+        $this->category->delete($id);
+        return redirect()->route('admin.categories.index')->with('success', 'Category Deleted!');
+    }
 }

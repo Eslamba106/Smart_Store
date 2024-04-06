@@ -8,15 +8,22 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Category\ProductRepositoryModel;
+use App\Repositories\Category\CategoryRepositoryModel;
 
 class ProductController extends Controller
 {
     public $products ;
     public $category ;
     public $brand ;
-    public function __construct(Product $products , Category $category , Brand $brand)
-    {
-        $this->products = $products ;
+    // public function __construct(Product $products , Category $category , Brand $brand)
+    // {
+    //     $this->products = $products ;
+    //     $this->category = $category ;
+    //     $this->brand = $brand ;
+    // }
+    public function __construct(ProductRepositoryModel $products ,CategoryRepositoryModel $category ,BrandRepositoryModel $brand ){
+        $this->products = $products;
         $this->category = $category ;
         $this->brand = $brand ;
     }
