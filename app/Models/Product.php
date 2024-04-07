@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory , SoftDeletes;
     protected $table = 'products' ;
-    protected $fillable = ['id' , 'name' , 'image' , 'description' , 'price' , 'discount_price' , 'category_id' , 'brand_id'] ;
+    protected $fillable = ['id' , 'name' , 'image' , 'quantity' , 'description' , 'price' , 'discount_price' , 'category_id' , 'brand_id'] ;
     public function category(){
         return $this->belongsTo(Category::class , 'category_id');
     }

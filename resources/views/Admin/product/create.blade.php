@@ -1,17 +1,17 @@
-<x-back-office.dashboard-layout title="انشاء منتج">
+<x-back-office.dashboard-layout title="{{ __('dashboard/product/create.add_product') }}">
     <x-slot:breadcrumb >
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">اضافة منتج جديد</h1>
+                        <h1 class="m-0 text-dark">{{ __('dashboard/product/create.add_new_product') }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             {{-- @section('breadcrumb') --}}
-                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('dashboard/product/create.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="{{ route('admin.products.index') }}">المنتجات</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('admin.products.index') }}">{{ __('dashboard/product/create.products') }}</a></li>
                             {{-- @show --}}
                         </ol>
                     </div><!-- /.col -->
@@ -26,7 +26,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="modal-title f-w-600" id="exampleModalLabel">انشاء منتج</h5>
+                            <h5 class="modal-title f-w-600" id="exampleModalLabel">{{ __('dashboard/product/create.add_product') }}</h5>
                         </div>
 
                         <div class="card-body">
@@ -38,14 +38,14 @@
                                         {!! implode('', $errors->all('<div>:message</div>')) !!}
                                     @endif
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">اسم المنتج</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.product_name') }}</label>
                                         <input class="form-control" id="validationCustom01" type="text" name="name"
                                             value="">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">القسم</label>
-                                        <select name="parent_id" id="validationCustom01" class="form-control">
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.category') }}</label>
+                                        <select name="category_id" id="validationCustom01" class="form-control">
                                             <option value=""> </option>
                                             @foreach ($categories as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -54,8 +54,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">البراند</label>
-                                        <select name="parent_id" id="validationCustom01" class="form-control">
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.brand') }}</label>
+                                        <select name="brand_id" id="validationCustom01" class="form-control">
                                             <option value=""> </option>
                                             @foreach ($brands as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -63,20 +63,31 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group mb-0">
+                                    {{-- <div class="form-group mb-0">
                                         <label for="validationCustom01" class="mb-1">الوصف</label>
                                         <x-form.input name="description" type="text" placeholder="desc" id="validationCustom01" />
                              
+                                    </div> --}}
+                                    <div class="form-group mb-0">
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.description') }}</label>
+                                        {{-- <x-form.input name="price" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.description') }}" /> --}}
+                                        <textarea name="description" class="form-control" id="" cols="30" rows="10"></textarea>
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="validationCustom01" class="mb-1">السعر</label>
-                                        <x-form.input name="price" type="text" id="validationCustom01" placeholder="price" />
-                                        {{-- <input class="form-control dropify"
-                                            data-default-file="{{ asset('appfavicon/64e0a5a0576e919-08-2023.png') }}"
-                                            id="validationCustom01" type="file" name="image"> --}}
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.price') }}</label>
+                                        <x-form.input name="price" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.price') }}" />
+                                    </div>
+
+                                    <div class="form-group mb-0">
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.total') }}</label>
+                                        <x-form.input name="total" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.total') }}" />
                                     </div>
                                     <div class="form-group mb-0">
-                                        <label for="validationCustom01" class="mb-1">الصورة</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.quantity') }}</label>
+                                        <x-form.input name="quantity" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.quantity') }}" />
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.image') }}</label>
                                         <input class="form-control dropify"
                                             data-default-file="{{ asset('appfavicon/64e0a5a0576e919-08-2023.png') }}"
                                             id="validationCustom01" type="file" name="image">
@@ -87,7 +98,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn" style="background-color: #602D8D ; color:white"
-                                            type="submit">حفظ</button>
+                                            type="submit">{{ __('dashboard/product/create.save') }}</button>
                                     </div>
 
 

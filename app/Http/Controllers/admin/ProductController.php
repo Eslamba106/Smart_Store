@@ -51,6 +51,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
         $slug = Str::slug($request->name , '-');
         $path = uniqid().'-'.$slug.'.'.$request->image->extension();
 
@@ -70,8 +71,8 @@ class ProductController extends Controller
 
     public function show($request)
     {
-        $categories = $this->category->get();
-        $item = $this->products->where('id' , $request)->firstOrFail() ;
+        $categories = $this->category->getCategories();
+        $item = Product::where('id' , $request)->first() ;
         return view('Admin.product.show' , compact('item'))->with('categories' , $categories);
     }
 

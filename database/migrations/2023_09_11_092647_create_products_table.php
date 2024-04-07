@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('price');
             $table->string('discount_price');
+            $table->integer('quantity');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
             $table->timestamps();
