@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.front.app')
 @section('content')
     {{-- <div >
       <div class="header"> --}}
@@ -95,7 +95,7 @@
                   </div>
        <div class="shopping_cart">
         <div class="cart">
-            <a href="{{ route('cartitems.index') }}" title="View my shopping cart" rel="nofollow">
+            {{-- <a href="{{ route('cartitems.index') }}" title="View my shopping cart" rel="nofollow"> --}}
                 <strong class="opencart"> </strong>
                     <span class="cart_title">Cart</span>
                         <span class="no_product">(empty)</span>
@@ -139,7 +139,7 @@
         <ul id="dc_mega-menu-orange" class="dc_mm-orange">
            <li><a href="/">Home</a></li>
               <li>
-                <a href="{{ route('products.index') }}">Products</a>
+                <a href="">Products</a>
                     <ul>
                       @foreach ($maincategories as $category)
                             <li><a href="products.html">{{ $category->name }}</a>
@@ -153,14 +153,14 @@
                     </ul>
               </li>
 
-              <li><a href="{{ route('brand.index') }}">Top Brands</a>
+              <li><a href="">Top Brands</a>
                 <ul> 
                     @foreach ($mainbrands as $brand)
                     <li><a href="products.html">{{ $brand->name }}</a></li>
                     @endforeach
                 </ul> 
               </li>
-    <li><a href="{{ route('category.index') }}">Department</a>
+    <li><a href="">Department</a>
       <ul>
         @foreach ($maincategories as $item)
         <li><a href="#">{{ $item->name }}</a></li>
@@ -172,10 +172,10 @@
      {{-- <li><a href="#">Delivery</a></li> --}}
     <li><a href="faq.html">FAQS</a></li>
     <li><a href="contact.html">Contact</a> </li>
-    @if (auth()->user()->type == 'admin')
+    {{-- @if (auth()->user()->type == 'admin') --}}
         
-    <li><a href="{{ route('admin') }}">Admin</a> </li>
-    @endif
+    <li><a href="">Admin</a> </li>
+    {{-- @endif --}}
     <div class="clear"></div>
   </ul>
   </div>
@@ -183,7 +183,7 @@
 
   @yield('content2')
 
-  @include('layouts.footer')
+  @include('layouts.front.footer')
 
 
   <script type="text/javascript">

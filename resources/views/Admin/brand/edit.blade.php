@@ -1,19 +1,19 @@
-<x-back-office.dashboard-layout title="تعديل براند : {{ $query->name }}">
+<x-back-office.dashboard-layout title="{{ __('dashboard/brand/edit.edit_brand') .$query->name }}">
 
     <x-slot:breadcrumb>
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">تعديل براند : {{ $query->name }}</h1>
+                        <h1 class="m-0 text-dark">{{ __('dashboard/brand/edit.edit_brand') .$query->name }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             {{-- @section('breadcrumb') --}}
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __("dashboard/brand/edit.home")}}</a>
                             </li>
                             <li class="breadcrumb-item active"><a
-                                    href="{{ route('admin.categories.index') }}">البراندات</a></li>
+                                    href="{{ route('admin.categories.index') }}">{{ __("dashboard/brand/edit.brands")}}</a></li>
                             {{-- @show --}}
                         </ol>
                     </div><!-- /.col -->
@@ -32,7 +32,7 @@
 
 
                         <div class="card-header">
-                            <h5 class="modal-title f-w-600" id="exampleModalLabel">تعديل البراند</h5>
+                            <h5 class="modal-title f-w-600" id="exampleModalLabel">{{ __("dashboard/brand/edit.edit_brands")}}</h5>
                         </div>
 
                         <div class="card-body">
@@ -45,13 +45,13 @@
                                         {!! implode('', $errors->all('<div>:message</div>')) !!}
                                     @endif
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">الاسم</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __("dashboard/brand/edit.name")}}</label>
                                         <input class="form-control" id="validationCustom01" type="text"
                                             name="name" value="{{ $query->name }}">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">البراند الرئيسي</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __("dashboard/brand/edit.main_brand")}}</label>
                                         <x-form.select name="parent_id" :options="$parents"  />
                                     </div>
 
@@ -61,7 +61,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn" style="background-color: #602D8D ; color:white"
-                                            type="submit">تعديل</button>
+                                            type="submit"> {{ __("dashboard/brand/edit.home")}} </button>
                                     </div>
 
 

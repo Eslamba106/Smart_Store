@@ -8,7 +8,7 @@
                 {{-- <div class="login_panel"> --}}
                     <h3>Existing Customers</h3>
                     <p>Sign in with the form below.</p>
-                    <form action="{{ route('admin.login') }}" method="post">
+                    <form action="{{ route('login') }}" method="post">
                         @csrf
                         <div class="form-group">
 

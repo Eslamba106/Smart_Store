@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="form-group mb-0">
                                         <label for="validationCustom01" class="mb-1">السعر</label>
-                                        <x-form.input name="price" type="text"  />
+                                        <x-form.input name="price" type="text" id="validationCustom01" placeholder="price" />
                                         {{-- <input class="form-control dropify"
                                             data-default-file="{{ asset('appfavicon/64e0a5a0576e919-08-2023.png') }}"
                                             id="validationCustom01" type="file" name="image"> --}}

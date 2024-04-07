@@ -4,23 +4,23 @@ return [
     [
         // "icon"   => "nav-icon fas fa-tachometer-alt",
         "route"  => "admin.dashboard",
-        "title"  => "الرئيسية",
+        "title"  => "dashboard/general.home",
         "active" => "admin.dashboard",
     ],
     [
         "route" => "admin.categories.index",
-        "title" => "الاقسام",
+        "title" => "dashboard/general.categories",
         "badge" => "Eslam",
         "active"=> "admin.categories.*"
     ],
     [
         "route" => "admin.brands.index",
-        "title" => "البراندات",
+        "title" => "dashboard/general.brands",
         "active"=> "admin.brands.*",
     ],
     [
         "route" => "admin.products.index",
-        "title" => "المنتجات",
+        "title" => "dashboard/general.products",
         "active"=> "admin.products.*",
     ],
 ];

@@ -1,17 +1,17 @@
-<x-back-office.dashboard-layout title="انشاء براند">
+<x-back-office.dashboard-layout title="{{ __('dashboard/brand/create.add_brand') }}">
     <x-slot:breadcrumb >
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">اضافة براند جديد</h1>
+                        <h1 class="m-0 text-dark">{{ __('dashboard/brand/create.add_new_brand') }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             {{-- @section('breadcrumb') --}}
-                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('dashboard/brand/create.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="{{ route('admin.brands') }}">البراندات</a></li>
+                                <li class="breadcrumb-item active"><a href="{{ route('admin.brands.index') }}">{{ __('dashboard/brand/create.brands') }}</a></li>
                             {{-- @show --}}
                         </ol>
                     </div><!-- /.col -->
@@ -26,7 +26,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="modal-title f-w-600" id="exampleModalLabel">انشاء براند</h5>
+                            <h5 class="modal-title f-w-600" id="exampleModalLabel">{{ __('dashboard/brand/create.add_brand') }}</h5>
                         </div>
 
                         <div class="card-body">
@@ -38,13 +38,13 @@
                                         {!! implode('', $errors->all('<div>:message</div>')) !!}
                                     @endif
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">اسم البراند</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/brand/create.brand_name') }}</label>
                                         <input class="form-control" id="validationCustom01" type="text" name="name"
                                             value="">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">البراند الرئيسي</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/brand/create.main_brand') }}</label>
                                         <select name="parent_id" id="validationCustom01" class="form-control">
                                             <option value=""> </option>
                                             @foreach ($brands as $item)
@@ -65,7 +65,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn" style="background-color: #602D8D ; color:white"
-                                            type="submit">حفظ</button>
+                                            type="submit">{{ __('dashboard/brand/create.save') }}</button>
                                     </div>
 
 

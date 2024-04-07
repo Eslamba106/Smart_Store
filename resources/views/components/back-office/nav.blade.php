@@ -6,7 +6,7 @@
                 <a href="{{ route($item['route']) }}" class="nav-link {{ Route::is($item['active']) ? "active" : ''  }}">
                     @if (isset($item['icon']) )<i class="{{ $item['icon'] }}"></i>@endif
                     <p>
-                        {{ $item['title'] }}
+                        {{ __($item['title']) }}
                         @if (isset($item['badge']))
                         <span class="right badge badge-danger">{{ $item['badge'] }}</span>
                         @endif

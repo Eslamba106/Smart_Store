@@ -17,8 +17,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('css/dist/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="{{ asset('fonts/SansPro/SansPro.min.css') }}">
+    @if(session()->has("locale") && session()->get("locale") == "ar")
     <link rel="stylesheet" href="{{ asset('css/bootstrap_rtl-v4.2.1/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap_rtl-v4.2.1/custom_rtl.css') }}">
+    @endif
     <link rel="stylesheet" href="{{ asset('css/mycustomstyle.css') }}">
     @stack('styles')
 
@@ -33,12 +35,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">الرئيسية</a>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">{{ __('dashboard/general.home') }}</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <form action="{{ route('admin.logout') }}" method="post">
                         @csrf
-                        <button type="submit" class="nav-link btn ">تسجيل الخروج</button>
+                        <button type="submit" class="nav-link btn ">{{ __('dashboard/general.logout') }}</button>
                     </form>
                     {{-- <a href="{{  }}" class="nav-link"> </a> --}}
                 </li>
@@ -145,74 +147,155 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                {{-- language convert --}}
+                <li class="nav-item dropdown">
+                    
+                    <a class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+                        {{-- <i class="far fa-bell"></i> --}}
+                        <span class="badge badge-success navbar-badge">{{ __('dashboard/general.lang') }}
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-header">{{ __('dashboard/general.lang') }}</span>
+                        <div class="dropdown-divider"></div>
+                        {{-- <a href="{{ route('langConvert' , 'ar') }}" class="dropdown-item"> --}}
+                        <a href="{{ route('lang' , 'ar') }}" class="dropdown-item">
+                            {{-- <i class="fas fa-envelope mr-2"></i> --}}
+                            {{-- Arabic --}}
+                            {{ __('dashboard/general.arabic') }}
+
+                            <span class="float-right text-muted text-sm">
+                                <img src="{{ URL::asset('images/flags/EG.png') }}" alt="">
+
+                            </span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('lang' , 'en') }}" class="dropdown-item">
+                        {{-- <a href="{{ route('langConvert' , 'en') }}" class="dropdown-item"> --}}
+                            {{-- <i class="fas fa-users mr-2"></i> --}}
+                            {{ __('dashboard/general.english') }}
+                            {{-- English --}}
+                            <span class="float-right text-muted text-sm">
+                            <img src="{{ URL::asset('images/flags/US.png') }}" alt=""> 
+
+                            </span>
+                        </a>
+                        {{-- <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> --}}
+                    </div>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                             class="fas fa-th-large"></i></a>
-                </li>
-            </ul>
-        </nav>
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                </li> --}}
+                {{-- <li class="nav-item">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">lang</span>
+                    </a>
+                    {{-- <div class="btn-group mb-1"> --}}
+                    {{-- <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"> --}}
+                        {{-- @if ('ar') --}}
+                        {{-- {{ LaravelLocalization::getCurrentLocaleName() }}
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                            {{-- <div class="dropdown-divider"></div> 
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-users mr-2"></i> Arabic
+                                <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
+                            </a>
+                            {{-- <div class="dropdown-divider"></div> 
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-users mr-2"></i> Arabic
+                                <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
+                            </a>
+                        </div>
+
+                            {{-- <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt=""> --}}
+                            {{-- @else --}}
+                            {{-- {{ LaravelLocalization::getCurrentLocaleName() }} --}}
+                            {{-- <img src="{{ URL::asset('assets/images/flags/US.png') }}" alt=""> --}}
+                            {{-- @endif --}}
+                    {{-- </button> --}}
+                    {{-- <div class="dropdown-menu"> --}}
+                    {{-- @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) --}}
+                    {{-- <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a> --}}
+                    {{-- @endforeach --
+    </div>
+    </li> --}}
+    </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="index3.html" class="brand-link">
+            {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
-            </a>
+            <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
+        </a>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ asset('storage/' . Auth::guard('admin')->user() ) }}" class="img-circle elevation-2"
-                            alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
-                    </div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{{ asset('images/teacher.png') }}" class="img-circle elevation-2"
+                    {{-- <img src="{{ asset('storage/' . Auth::guard('admin')->user()) }}" class="img-circle elevation-2" --}}
+                        alt="User Image">
                 </div>
-
-                <!-- Sidebar Menu -->
-
-                <x-back-office.nav />
-                {{-- <x-dashboard.nav /> --}}
-                <!-- /.sidebar-menu -->
+                <div class="info">
+                    <a href="#" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
+                </div>
             </div>
-            <!-- /.sidebar -->
-        </aside>
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            
-            {{ $breadcrumb ?? '' }}
-            <!-- /.content-header -->
 
-            <!-- Main content -->
+            <!-- Sidebar Menu -->
 
-            <!-- End Breadcrumbs -->
-
-            {{ $slot }}
-            <!-- /.content -->
+            <x-back-office.nav />
+            {{-- <x-dashboard.nav /> --}}
+            <!-- /.sidebar-menu -->
         </div>
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
-        <!-- /.control-sidebar -->
+        <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2023-<?php $mytime = Carbon\Carbon::now();
-            echo $mytime->format('Y'); ?> <a
-                    href="https://adminlte.io">{{ config('app.developer_name') }}</a>.</strong> All rights reserved.
-        </footer>
+        {{ $breadcrumb ?? '' }}
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+
+        <!-- End Breadcrumbs -->
+
+        {{ $slot }}
+        <!-- /.content -->
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+            <p>Sidebar content</p>
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+            {{ __('dashboard/general.anything_you_want') }}
+        </div>
+        <!-- Default to the left -->
+        <strong>{{ __('dashboard/general.Copyright') }} &copy; 2023-<?php $mytime = Carbon\Carbon::now();
+        echo $mytime->format('Y'); ?> <a
+                href="https://adminlte.io">{{ config('app.developer_name') }}</a>.</strong> {{ __('dashboard/general.all_rights_reserved') }}
+    </footer>
     </div>
     <!-- ./wrapper -->
 

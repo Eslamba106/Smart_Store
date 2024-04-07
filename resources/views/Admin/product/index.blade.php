@@ -24,7 +24,7 @@
 <a href="{{ route('admin.products.create') }}" >
     <button class="btn ml-5 mb-2 btn-dark" >اضافة منتج</button>
 </a>
-<form action="{{ URL::current() }}" method="get" class="d-flex justify-content-between mb-4">
+<form action="{{ URL::current() }}" method="get" class="d-flex justify-content-between m-2">
     <x-form.input name="name" placeholder="اسم المنتج" class="mx-2 input-group-sm" :value="request('name')"/>
     <button class="btn btn-dark mx-2"><i class="fas fa-search"></i></button>
 </form>

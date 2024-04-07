@@ -1,19 +1,19 @@
-<x-back-office.dashboard-layout title="تعديل قسم : {{ $query->name }}">
+<x-back-office.dashboard-layout title="{{ __('dashboard/category/edit.edit_category') .' '.$query->name }} ">
 
     <x-slot:breadcrumb>
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">تعديل قسم : {{ $query->name }}</h1>
+                        <h1 class="m-0 text-dark">{{ __('dashboard/category/edit.edit_category') .' '.$query->name }}</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             {{-- @section('breadcrumb') --}}
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('dashboard/category/edit.home') }}</a>
                             </li>
                             <li class="breadcrumb-item active"><a
-                                    href="{{ route('admin.categories.index') }}">الاقسام</a></li>
+                                    href="{{ route('admin.categories.index') }}">{{ __('dashboard/category/edit.category') }}</a></li>
                             {{-- @show --}}
                         </ol>
                     </div><!-- /.col -->
@@ -32,7 +32,7 @@
 
 
                         <div class="card-header">
-                            <h5 class="modal-title f-w-600" id="exampleModalLabel">تعديل القسم</h5>
+                            <h5 class="modal-title f-w-600" id="exampleModalLabel">{{ __('dashboard/category/edit.editCategory') }}</h5>
                         </div>
 
                         <div class="card-body">
@@ -45,13 +45,13 @@
                                         {!! implode('', $errors->all('<div>:message</div>')) !!}
                                     @endif
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">الاسم</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/category/edit.name') }}</label>
                                         <input class="form-control" id="validationCustom01" type="text"
                                             name="name" value="{{ $query->name }}">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="validationCustom01" class="mb-1">القسم الرئيسي</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/category/edit.main_category') }}</label>
                                         <x-form.select name="parent_id" :options="$parents"  />
                                         {{-- <select name="parent_id" id="validationCustom01" class="form-control">
 
@@ -73,7 +73,7 @@
                                     </div>
 
                                     <div class="form-group mb-0">
-                                        <label for="validationCustom01" class="mb-1">الصورة</label>
+                                        <label for="validationCustom01" class="mb-1">{{ __('dashboard/category/edit.image') }}</label>
                                         <input class="form-control dropify"
                                             {{-- data-default-file="{{ asset('category_images/' . $query->image) }}" --}}
                                             id="validationCustom01" type="file" name="image">
@@ -84,7 +84,7 @@
 
                                     <div class="modal-footer">
                                         <button class="btn" style="background-color: #602D8D ; color:white"
-                                            type="submit">تعديل</button>
+                                            type="submit">{{ __('dashboard/category/edit.edit') }}</button>
                                     </div>
 
 

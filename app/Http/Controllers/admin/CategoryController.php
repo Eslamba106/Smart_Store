@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $query = $this->category->get()->get();
+        $query = $this->category->getCategories()->get();
         return view('Admin.category.create')->with('categories' , $query);
     }
 
