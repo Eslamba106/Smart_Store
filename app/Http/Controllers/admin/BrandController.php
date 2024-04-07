@@ -27,7 +27,7 @@ class BrandController extends Controller
     public function index()
     {
 
-        $query = $this->brand->get();
+        $query = $this->brand->getBrands();
         // dd($query)
         return view('Admin.brand.index')->with('brands' , $query);
     }
@@ -35,7 +35,7 @@ class BrandController extends Controller
 
     public function create()
     {
-        $query = $this->brand->get();
+        $query = $this->brand->getBrands();
         // $mainbrand = $this->brand->where('parent_id' ,0)->get();
         // $brands = Brand::get();
         return view('Admin.brand.create')->with('brands' , $query);
@@ -45,10 +45,10 @@ class BrandController extends Controller
 
     public function show($id)
     {
-        $brands = $this->brand->where('id' , $id)->first();
-        $products =  $brands->product ;
-     
-        return view('Admin.brand.show')->with('products' ,$products);
+        $brand = Brand::where('id' , $id)->first();
+        $products =  $brand->product ;
+        // dd($brands->product);
+        return view('Admin.brand.show' , compact(['products' , 'brand']));
     }
 
     public function store(BrandStoreRequest $request)
@@ -75,7 +75,7 @@ class BrandController extends Controller
                 ->orWhere('parent_id', '<>', $id);
         })->pluck('name', 'id');
         $query = Brand::get()->where('id' , $id)->first();
-        $queries = $this->brand->get() ;
+        $queries = $this->brand->getBrands() ;
         return view('Admin.brand.edit' , compact(['query' , 'parents', 'queries'])); //->with('query' , $query)->with('queries' , $queries) ;
     }
 

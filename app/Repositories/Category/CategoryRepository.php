@@ -16,7 +16,7 @@ class CategoryRepository implements CategoryRepositoryModel
     {
         $this->items = collect([]);
     }
-    public function get()
+    public function getCategories()
     {
         $request = request();
         return Category::filter($request->query()); //with('parent')->

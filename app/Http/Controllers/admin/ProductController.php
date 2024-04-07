@@ -8,7 +8,8 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Category\ProductRepositoryModel;
+use App\Repositories\Brand\BrandRepositoryModel;
+use App\Repositories\Product\ProductRepositoryModel;
 use App\Repositories\Category\CategoryRepositoryModel;
 
 class ProductController extends Controller
@@ -31,10 +32,10 @@ class ProductController extends Controller
     public function index()
     {
 
-        $categories = $this->category->get() ;
-        $queries = $this->products->get() ;
-        
-        return view('Admin.product.index')->with('categories' , $categories)->with('products' , $queries);
+        $categories = $this->category->getCategories()->get() ;
+        $products = $this->products->getProducts() ;
+        // dd($categories->get());
+        return view('Admin.product.index')->with('categories' , $categories)->with('products' , $products);
     }
 
     /**
@@ -42,10 +43,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $brands = $this->brand->get() ;
-        $queries = $this->category->get();
-        $query = $this->products->get();
-        return view('Admin.product.create')->with('products' , $query)->with('categories' , $queries)->with('brands' , $brands);
+        $brands = $this->brand->getBrands() ;
+        $categories = $this->category->getCategories()->get();
+        $products = $this->products->getProducts();
+        return view('Admin.product.create' , compact(['brands' , 'products' , 'categories']));//->with('products' , $products)->with('categories' , $categories)->with('brands' , $brands);
     }
 
     public function store(Request $request)

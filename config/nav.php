@@ -14,12 +14,12 @@ return [
         "active"=> "admin.categories.*"
     ],
     [
-        "route" => "admin.brands",
+        "route" => "admin.brands.index",
         "title" => "البراندات",
         "active"=> "admin.brands.*",
     ],
     [
-        "route" => "admin.products",
+        "route" => "admin.products.index",
         "title" => "المنتجات",
         "active"=> "admin.products.*",
     ],

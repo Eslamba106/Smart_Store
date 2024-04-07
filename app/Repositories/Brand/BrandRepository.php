@@ -3,8 +3,8 @@
 namespace App\Repositories\Brand;
 
 use App\Models\Brand;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Storage;
 
 
 class BrandRepository implements BrandRepositoryModel
@@ -16,7 +16,7 @@ class BrandRepository implements BrandRepositoryModel
     {
         $this->items = collect([]);
     }
-    public function get()
+    public function getBrands()
     {
         $request = request();
         return Brand::paginate(); //with('parent')->

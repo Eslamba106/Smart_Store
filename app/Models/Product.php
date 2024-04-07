@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,5 +19,12 @@ class Product extends Model
     }
     public function brand(){
         return $this->belongsTo(Brand::class , 'brand_id');
+    }
+
+    public function scopeFilter(Builder $builder , $filters){
+
+        $builder->when($filters['name'] ?? false , function($builder , $value){
+            $builder->where('brands.name','like','%'.$value.'%');
+        });
     }
 }

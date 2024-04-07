@@ -55,6 +55,10 @@
                             class="btn btn-sm btn-outline-success">تعديل</a>
                     </td>
                     <td>
+                        <a href="{{ route('admin.brands.show', $brand->id) }}"
+                            class="btn btn-sm btn-outline-info">عرض</a>
+                    </td>
+                    <td>
                         <form action="{{ route('admin.brands.delete', $brand->id) }}" method="post">
                             @csrf
                             {{-- Form Method Spoofing --}}

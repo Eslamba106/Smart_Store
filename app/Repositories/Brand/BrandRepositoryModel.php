@@ -7,7 +7,7 @@ namespace App\Repositories\Brand;
 
 interface BrandRepositoryModel
 {
-    public function get() ;
+    public function getBrands() ;
     public function add($brand) ;
     public function delete($id);
 
