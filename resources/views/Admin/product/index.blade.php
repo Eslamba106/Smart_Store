@@ -40,6 +40,7 @@
             <th>{{ __('dashboard/product/product.quantity') }}</th>
             <th>{{ __('dashboard/product/product.category') }}</th>
             <th>{{ __('dashboard/product/product.brand') }}</th>
+            <th>{{ __('dashboard/product/product.created_at') }}</th>
             <th colspan="2">{{ __('dashboard/product/product.operations') }}</th>
         </tr>
     </thead>
@@ -73,7 +74,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="8">{{ __('dashboard/product/product.operations') }}</td>
+                <td colspan="8">{{ __('dashboard/product/product.defined') }}</td>
             </tr>
         @endforelse
         {{-- @else

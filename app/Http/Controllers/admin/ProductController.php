@@ -33,9 +33,9 @@ class ProductController extends Controller
     {
 
         $categories = $this->category->getCategories()->get() ;
-        $products = $this->products->getProducts() ;
+        $products = $this->products->getProducts()->get() ;
         // dd($categories->get());
-        return view('Admin.product.index')->with('categories' , $categories)->with('products' , $products);
+        return view('Admin.product.index' , compact(['categories' , 'products'])); //->with('categories' , $categories)->with('products' , $products);
     }
 
     /**
@@ -51,22 +51,23 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-        $slug = Str::slug($request->name , '-');
-        $path = uniqid().'-'.$slug.'.'.$request->image->extension();
+        // dd($request);p
+        $this->products->add($request);
+        // $slug = Str::slug($request->name , '-');
+        // $path = uniqid().'-'.$slug.'.'.$request->image->extension();
 
-        $request->image->move(public_path('product_image' ), $path);
-        $product = new Product();
-        $product->id = $request->id ;
-        $product->name = $request->name ;
-        $product->price = $request->price ;
-        $product->discount_price = $request->discount_price ;
-        $product->description = $request->description ;
-        $product->category_id = $request->category_id ;
-        $product->brand_id = $request->brand_id ;
-        $product->image = $path ;
-        $product->save();
-        return redirect()->route('products.index');
+        // $request->image->move(public_path('product_image' ), $path);
+        // $product = new Product();
+        // $product->id = $request->id ;
+        // $product->name = $request->name ;
+        // $product->price = $request->price ;
+        // $product->discount_price = $request->discount_price ;
+        // $product->description = $request->description ;
+        // $product->category_id = $request->category_id ;
+        // $product->brand_id = $request->brand_id ;
+        // $product->image = $path ;
+        // $product->save();
+        return redirect()->route('admin.products.index');
     }
 
     public function show($request)
@@ -79,11 +80,12 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $newproduct = $this->products->where('id' , $id)->first();
-        $categories = $this->category->get();
-        $newbrands = $this->brand->all();
-        return view('Admin.product.edit')->with('products' , $newproduct)
-        ->with('categories' , $categories)->with('newbrands' , $newbrands );
+        $product = Product::where('id' , $id)->first();
+        $categories = $this->category->getCategories();
+        $brands = $this->brand->getBrands();
+        return view('Admin.product.edit' , compact(['product' , 'categories' , 'brands']));
+        //->with('products' , $newproduct)
+        //->with('categories' , $categories)->with('newbrands' , $newbrands );
     }
 
 

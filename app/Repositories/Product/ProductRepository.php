@@ -22,19 +22,19 @@ class ProductRepository implements ProductRepositoryModel
         $request = request();
         return Product::filter($request->query()); //with('parent')->
     }
-    public function add($category)
+    public function add($product)
     {
-        $item = Category::where('id', $category->id)->first();
+        $item = Product::where('id', $product->id)->first();
         if ($item) {
-            // dd($item->image);
-            $data = $category->except('image');
+            $data = $product->except('image');
             $old_image = $item->image;
-            $data['parent_id'] = $category->parent_id ?? 0;
+            $data['category_id'] = $product->category_id;
+            $data['brand_id'] = $product->brand_id;
 
-            if ($category->hasFile('image')) {
+            if ($product->hasFile('image')) {
                 // $data['image'] = uploadImage($category, 'category_images');
-                $file = $category->file('image');
-                $path = $file->store('category_images', [
+                $file = $product->file('image');
+                $path = $file->store('product_images', [
                     'disk' => 'public',
                 ]);
                 $data['image'] = $path;
@@ -52,15 +52,16 @@ class ProductRepository implements ProductRepositoryModel
 
 
 
-            return $category;
+            return $product;
         } else {
-            $data = $category->except('image');
-            $data['parent_id'] = $category->parent_id ?? 0;
-            if ($category->hasFile('image')) {
-                $data['image'] = uploadImage($category, 'category_images');
+            $data = $product->except('image');
+            $data['category_id'] = $product->category_id ;
+            $data['brand_id'] = $product->brand_id ;
+            if ($product->hasFile('image')) {
+                $data['image'] = uploadImage($product, 'product_images');
             }
-            $category = Category::create($data);
-            return $category;
+            $product = Product::create($data);
+            return $product;
         }        
     }
     public function delete($id)

@@ -80,7 +80,7 @@
 
                                     <div class="form-group mb-0">
                                         <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.total') }}</label>
-                                        <x-form.input name="total" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.total') }}" />
+                                        <x-form.input name="discount_price" type="text" id="validationCustom01" placeholder="{{ __('dashboard/product/create.total') }}" />
                                     </div>
                                     <div class="form-group mb-0">
                                         <label for="validationCustom01" class="mb-1">{{ __('dashboard/product/create.quantity') }}</label>
